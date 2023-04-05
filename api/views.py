@@ -12,3 +12,6 @@ class PollViewSet(viewsets.ModelViewSet):
     paginate_by = 10
     paginate_by_param = 'page_size'
     max_paginate_by = 100
+
+    def get_queryset(self):
+        return super().get_queryset().order_by('-expiry_date')

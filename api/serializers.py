@@ -1,4 +1,4 @@
-from datetime import timezone
+from django.utils import timezone
 from rest_framework import serializers
 from .models import Poll, Choice
 
@@ -18,4 +18,5 @@ class PollSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Poll
-        fields = ['id', 'title', 'description', 'choices', 'expired']
+        fields = ['id', 'title', 'description',
+                  'choices', 'expired', 'expiry_date']
