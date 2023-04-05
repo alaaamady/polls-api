@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
 import uuid
+from random import randint
 
 
 class Poll(models.Model):
@@ -40,3 +41,12 @@ class Vote(models.Model):
 
     def __str__(self):
         return self.email
+
+    def is_otp_expired(self):
+        now = timezone.now()
+        elapsed_time = now - self.created_at
+        return elapsed_time.seconds >= 600
+
+    @staticmethod
+    def generate_otp():
+        return randint(100000, 999999)
