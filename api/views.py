@@ -55,7 +55,7 @@ class VoteViewSet(viewsets.ViewSet):
                 [email],
                 fail_silently=False,
             )
-            return Response({'message': 'OTP has been sent to your email.'}, status=status.HTTP_201_CREATED)
+            return Response({'message': 'OTP has been sent to your email.', 'uuid': str(vote.uuid)}, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
