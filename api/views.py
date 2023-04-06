@@ -27,6 +27,19 @@ class PollViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return super().get_queryset().order_by('-expiry_date')
 
+    @action(detail=True, methods=['get'])
+    def choices_with_vote_count(self, request, pk=None):
+        poll = self.get_object()
+        choices = poll.choices.all()
+        data = []
+        for choice in choices:
+            vote_count = choice.votes.count()
+            data.append({
+                'choice_text': choice.text,
+                'vote_count': vote_count,
+            })
+        return Response(data)
+
 
 class VoteViewSet(viewsets.ViewSet):
     def create(self, request):
