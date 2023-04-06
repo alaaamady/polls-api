@@ -45,3 +45,15 @@ class VoteSerializer(serializers.Serializer):
             raise serializers.ValidationError(
                 'You have already voted on this poll.')
         return value
+
+
+class VoteConfirmationSerializer(serializers.Serializer):
+    otp = serializers.IntegerField()
+    uuid = serializers.UUIDField()
+
+    def validate_uuid(self, value):
+        try:
+            Vote.objects.get(uuid=value)
+        except Vote.DoesNotExist:
+            raise serializers.ValidationError('Invalid vote UUID.')
+        return value

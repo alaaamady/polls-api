@@ -1,8 +1,12 @@
 from rest_framework import viewsets, filters, status
 from rest_framework.response import Response
 from .models import Poll, Choice, Vote
-from .serializers import PollSerializer, VoteSerializer
+from .serializers import PollSerializer, VoteSerializer, VoteConfirmationSerializer
 from django.core.mail import send_mail
+from rest_framework.decorators import action
+from rest_framework.views import APIView
+
+
 import environ
 
 
@@ -50,3 +54,26 @@ class VoteViewSet(viewsets.ViewSet):
             return Response({'message': 'OTP has been sent to your email.'}, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class VoteConfirmationView(APIView):
+    def post(self, request):
+        serializer = VoteConfirmationSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        uuid = serializer.validated_data['uuid']
+        otp = serializer.validated_data['otp']
+
+        try:
+            vote = Vote.objects.get(uuid=uuid)
+        except Vote.DoesNotExist:
+            return Response({'error': 'Invalid vote UUID.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if otp != vote.otp:
+            return Response({'error': 'Invalid OTP.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if vote.is_otp_expired():
+            return Response({'error': 'OTP expired.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        vote.confirmed = True
+        vote.save()
+        return Response({'success': 'Vote confirmed.'})
