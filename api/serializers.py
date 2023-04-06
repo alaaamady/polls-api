@@ -37,8 +37,8 @@ class PollSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Poll
-        fields = ['id', 'title', 'description',
-                  'choices', 'expired', 'expiry_date', 'total_vote_count', 'choices_with_vote_percentage']
+        fields = ['id', 'title', 'description', 'expired', 'expiry_date',
+                  'total_vote_count', 'choices_with_vote_percentage']
 
 
 class VoteSerializer(serializers.Serializer):
