@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "e32a8d76-a32c-42a6-b025-35c15f696799",
+		"name": "valify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21312156"
+	},
+	"item": [
+		{
+			"name": "get-polls",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://polls-api-production.up.railway.app/polls/?search=4",
+					"protocol": "https",
+					"host": [
+						"polls-api-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"polls",
+						""
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \"poll_id\": 3,\n            \"choice_id\": 7,\n            \"email\": \"test@example.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://polls-api-production.up.railway.app/vote/",
+					"protocol": "https",
+					"host": [
+						"polls-api-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"vote",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "confirm-vote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"otp\": 430821,\n    \"uuid\": \"1e9f7bcd-01ea-49e4-970b-bc556c998061\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/confirm_vote",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"confirm_vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vote-count",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "not-found",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
