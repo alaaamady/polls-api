@@ -25,6 +25,7 @@ class PollSerializer(serializers.ModelSerializer):
 class VoteSerializer(serializers.Serializer):
     choice_id = serializers.IntegerField()
     email = serializers.EmailField()
+    poll_id = serializers.IntegerField()
 
     def validate_choice_id(self, value):
         try:
@@ -35,8 +36,9 @@ class VoteSerializer(serializers.Serializer):
 
     def validate_email(self, value):
         try:
+            poll_id = self.initial_data['poll_id']
             Vote.objects.get(
-                email=value, choice__poll=self.context['view'].kwargs['pk'])
+                email=value, choice__poll=poll_id)
         except Vote.DoesNotExist:
             pass
         else:

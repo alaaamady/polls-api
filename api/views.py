@@ -3,7 +3,11 @@ from rest_framework.response import Response
 from .models import Poll, Choice, Vote
 from .serializers import PollSerializer, VoteSerializer
 from django.core.mail import send_mail
-from django.utils import timezone
+import environ
+
+
+env = environ.Env()
+environ.Env.read_env()
 
 
 class PollViewSet(viewsets.ModelViewSet):
@@ -39,7 +43,7 @@ class VoteViewSet(viewsets.ViewSet):
             send_mail(
                 'Your One-Time Password for Voting',
                 f'Your OTP is {vote.otp}. It will expire in 10 minutes.',
-                'from@example.com',
+                env('EMAIL_ADDRESS'),
                 [email],
                 fail_silently=False,
             )
