@@ -29,6 +29,7 @@ class PollSerializer(serializers.ModelSerializer):
             choice_vote_count = choice.votes.count()
             percentage = choice_vote_count / vote_count * 100 if vote_count > 0 else 0
             data.append({
+                'choice_id': choice.id,
                 'choice_text': choice.text,
                 'vote_count': choice_vote_count,
                 'vote_percentage': percentage
