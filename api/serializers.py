@@ -10,7 +10,6 @@ class ChoiceSerializer(serializers.ModelSerializer):
 
 
 class PollSerializer(serializers.ModelSerializer):
-    choices = ChoiceSerializer(many=True, read_only=True)
     expired = serializers.SerializerMethodField()
     total_vote_count = serializers.SerializerMethodField()
     choices_with_vote_percentage = serializers.SerializerMethodField()
@@ -29,7 +28,7 @@ class PollSerializer(serializers.ModelSerializer):
             choice_vote_count = choice.votes.count()
             percentage = choice_vote_count / vote_count * 100 if vote_count > 0 else 0
             data.append({
-                'choice_id': choice.id,
+                'id': choice.id,
                 'choice_text': choice.text,
                 'vote_count': choice_vote_count,
                 'vote_percentage': percentage
@@ -38,8 +37,8 @@ class PollSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Poll
-        fields = ['id', 'title', 'description', 'expired', 'expiry_date',
-                  'total_vote_count', 'choices_with_vote_percentage']
+        fields = ('id', 'title', 'description', 'expired', 'expiry_date',
+                  'total_vote_count', 'choices_with_vote_percentage')
 
 
 class VoteSerializer(serializers.Serializer):
