@@ -40,3 +40,10 @@ EMAIL_PASSWORD=
 
 6. Start the server:
 `python manage.py runserver`
+
+
+## TODO
+
+1. The current implementation only has unit tests for the views module. We need to implement unit tests for all modules to ensure that the system is functioning correctly. 
+2. Create OpenAPI documentation using Swagger
+3. Implement hashing for OTPs to enhance security.
