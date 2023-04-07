@@ -1,6 +1,15 @@
 # Web Portal for Voting System
-### This repository contains the source code for a web api that provides access to a voting system's various features. The website can be accessed at [This Link](https://polls-app-alaaamady.vercel.app)
+### This repository contains the source code for an API that services a web application called Votify, a website for shared polls. You can visit the website through [This Link](https://polls-app-alaaamady.vercel.app)
 
+## Prerequisites
+
+Before you can start using Git and Python, you need to make sure you have the following software installed on your computer:
+
+- Git: Git is a version control system that allows you to track changes to your code over time. To install Git, follow the instructions for your operating system at https://git-scm.com/downloads.
+
+- Pip: Pip is a package manager for Python that allows you to easily install and manage third-party libraries and modules. To install Pip, follow the instructions at https://pip.pypa.io/en/stable/installation/.
+
+- Python: Python is a popular programming language used for a wide range of applications, including web development, data analysis, and machine learning. To install Python, follow the instructions for your operating system at https://www.python.org/downloads/.
 ## Installation
 
 ## API
@@ -22,7 +31,7 @@ To run the Django REST API, follow these steps:
 
 `pip install -r requirements.txt`
 
-5. Set up the database:
+5. Configure the postgres database by setting up a local database or a hosted one and then set up the following environment variables in your root project `.env` file:
 
 ```
 ## .env file
@@ -32,10 +41,20 @@ DB_USER=
 DB_PASSWORD=
 DB_HOST=
 DB_PORT=
+```
+
+6. Run database migration: 
+
+`python manage.py migrate`
+
+
+7. Setup the sender email host and password by adding the following varialvles to you `.env` file
+
+```
 EMAIL_ADDRESS=
 EMAIL_PASSWORD=
-```
-`python manage.py migrate`
+``````
+57
 
 6. Start the server:
 `python manage.py runserver`
@@ -43,18 +62,18 @@ EMAIL_PASSWORD=
 ## Endpoints list
 |Name|  Description |
 |--|--|
-| /GET /polls | Lists all polls in a paginated response of maximum 10 entries |
-| /GET /polls?search= |searches all polls' titles, description or choices |
-| /POST /vote |submits a vote for verification |
-| /POST /confirm-vote |verifies a vote's OTP|
+| /GET /polls?page= | Lists all polls in a paginated response of maximum 10 entries |
+| /GET /polls?search= | Searches all polls' titles, description or choices |
+| /POST /vote | Submits a vote for verification |
+| /POST /confirm-vote | Verifies a vote's OTP|
 
 
 
 
-## To be imporovised
+## To be improved
 
 1. The current implementation only has unit tests for the views module. it should cover all app modules, eg. Serializers, Models.
-2. an OpenAPI documentation would aid in on boarding users to utilize this API quicker. for now there is a Postmand collection for all endpoints.
+2. An OpenAPI documentation would aid in on boarding users to utilize this API quicker. for now there is a Postmand collection for all endpoints.
 3.  Use a secure method for generating and storing the OTP, such as using a cryptographically secure random number generator and storing the OTP in hashed form.
 4.  Implement rate limiting and/or CAPTCHA to prevent automated attacks that attempt to guess OTPs.
 5.  Log all OTP generation, sending, and validation activities, to allow for audit trails and investigation in case of suspicious activities.
