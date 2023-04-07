@@ -1,4 +1,4 @@
-# Web Portal for Voting System
+# Votify API
 ### This repository contains the source code for an API that services a web application called Votify, a website for shared polls. You can visit the website through [This Link](https://polls-app-alaaamady.vercel.app)
 
 ## Prerequisites
@@ -72,8 +72,8 @@ EMAIL_PASSWORD=
 
 ## To be improved
 
-1. The current implementation only has unit tests for the views module. it should cover all app modules, eg. Serializers, Models.
-2. An OpenAPI documentation would aid in on boarding users to utilize this API quicker. for now there is a Postmand collection for all endpoints.
+1. The current implementation only has unit tests for the views module. It should cover all app modules, eg. Serializers, Models.
+2. An OpenAPI documentation would aid in on boarding users to utilize this API quicker. For now there is a Postman collection for all endpoints.
 3.  Use a secure method for generating and storing the OTP, such as using a cryptographically secure random number generator and storing the OTP in hashed form.
 4.  Implement rate limiting and/or CAPTCHA to prevent automated attacks that attempt to guess OTPs.
 5.  Log all OTP generation, sending, and validation activities, to allow for audit trails and investigation in case of suspicious activities.
