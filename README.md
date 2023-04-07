@@ -1,5 +1,5 @@
 # Web Portal for Voting System
-### This repository contains the source code for a web portal that provides access to a voting system's various features. The website can be accessed at [This Link](https://polls-app-alaaamady.vercel.app)
+### This repository contains the source code for a web api that provides access to a voting system's various features. The website can be accessed at [This Link](https://polls-app-alaaamady.vercel.app)
 
 ## Installation
 
