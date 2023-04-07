@@ -157,3 +157,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'https://polls-app-alaaamady.vercel.app'
 ]
+CSRF_TRUSTED_ORIGINS = [
+    'https://polls-api-production.up.railway.app/'
+]
